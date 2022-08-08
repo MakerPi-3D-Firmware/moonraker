@@ -108,7 +108,7 @@ class AppDeploy(BaseDeploy):
         # satisfy the confighelper's requirements.
         self.moved_origin: Optional[str] = config.get('moved_origin', None)
         self.origin: str = config.get('origin')
-        self.primary_branch = config.get("primary_branch", "master")
+        self.primary_branch = config.get("primary_branch", "master-sg")
         self.npm_pkg_json: Optional[pathlib.Path] = None
         if config.getboolean("enable_node_updates", False):
             self.npm_pkg_json = self.path.joinpath("package-lock.json")

@@ -36,7 +36,7 @@ ALL_REMOTES="$( $GIT_CMD remote | tr '\n' ' ' | awk '{gsub(/^ +| +$/,"")} {print
 echo "Found Klipper Remotes: $ALL_REMOTES"
 for val in $ALL_REMOTES; do
     REMOTE_URL="$( $GIT_CMD remote get-url $val | awk '{gsub(/^ +| +$/,"")} {print tolower($0)}' )"
-    match="$( echo $REMOTE_URL | grep -Ecm1 '(klipper3d|kevinoconnor)/klipper'|| true )"
+    match="$( echo $REMOTE_URL | grep -Ecm1 '(MakerPi-3D-Firmware|kevinoconnor)/klipper'|| true )"
     if [ "$match" -eq 1  ]; then
         echo "Found Remote $val"
         REMOTE="$val"
@@ -48,8 +48,8 @@ done
 
 $GIT_CMD fetch $REMOTE
 
-DESC="$( $GIT_CMD $DESCRIBE $REMOTE/master | awk '{gsub(/^ +| +$/,"")} {print $0}' )"
-HASH="$( $GIT_CMD rev-parse $REMOTE/master | awk '{gsub(/^ +| +$/,"")} {print $0}' )"
+DESC="$( $GIT_CMD $DESCRIBE $REMOTE/master-sg | awk '{gsub(/^ +| +$/,"")} {print $0}' )"
+HASH="$( $GIT_CMD rev-parse $REMOTE/master-sg | awk '{gsub(/^ +| +$/,"")} {print $0}' )"
 
 if [ "$PRINT_ONLY" = "y" ]; then
     echo "
@@ -64,7 +64,7 @@ else
     git tag -a $TAG -m "Moonraker Version $TAG
 Klipper Tag Data
 repo: klipper
-branch: master
+branch: master-sg
 version: $DESC
 commit: $HASH
 "
